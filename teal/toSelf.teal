@@ -1,0 +1,7 @@
+txn Sender
+txn Receiver
+==
+txn  Amount
+int 5000000
+<=
+&&

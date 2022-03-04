@@ -1,0 +1,33 @@
+#pragma version 3
+
+global GroupSize
+int 2
+==
+gtxn 0 TypeEnum
+int pay
+==
+&&
+gtxn 1 TypeEnum
+int pay
+==
+&&
+gtxn 0 Receiver
+addr RZUFWIN7S6WTBDD7GQAQNLKGQNSCOFIU2BYINT2WXEUDACCA4E3ECI6XEE
+==
+gtxn 0 Receiver
+addr BNCTTEU5BGVOU3OO2SQ2AOSWVGSTPJFOKODGGAXWVYKM5XSWFGVB6SPCPM
+==
+||
+gtxn 1 Receiver
+addr RZUFWIN7S6WTBDD7GQAQNLKGQNSCOFIU2BYINT2WXEUDACCA4E3ECI6XEE
+==
+gtxn 1 Receiver
+addr BNCTTEU5BGVOU3OO2SQ2AOSWVGSTPJFOKODGGAXWVYKM5XSWFGVB6SPCPM
+==
+||
+&&
+&&
+int 1000000
+txn Amount
+>=
+&&

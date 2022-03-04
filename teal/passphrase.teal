@@ -1,0 +1,22 @@
+// Check the fee is reasonable
+// In this case 10,000 microalgos
+txn Fee
+int 10000
+<=
+// Check passphrase length is correct
+arg 0
+len
+int 73
+==
+&&
+// Check sha256 value of passphrase
+arg 0
+sha256 // Pops value on top of the stack and pushes the sha256 value
+byte base64 30AT2gOReDBdJmLBO/DgvjC6hIXgACecTpFDcP1bJHU=
+==
+&&
+// Make sure the CloseRemainderTo field is not set
+txn CloseRemainderTo // Push CRT transaction property onto the stack
+txn Receiver
+==
+&&

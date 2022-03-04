@@ -1,0 +1,20 @@
+#pragma version 2
+txn Sender
+addr !!ADDRESS!!
+==
+txn Receiver
+addr !!!RECEVIER!!!
+==
+&&
+txn Amount
+int 1000000
+<=
+txn CloseRemainderTo
+global ZeroAddress
+==
+&&
+txn AssetCloseTo
+global ZeroAddress
+==
+&&
+&&

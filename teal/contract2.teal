@@ -1,0 +1,12 @@
+#pragma version 3
+addr RZUFWIN7S6WTBDD7GQAQNLKGQNSCOFIU2BYINT2WXEUDACCA4E3ECI6XEE
+txn Receiver
+==
+bnz approved 
+addr HKW7RJUGITRCXJA2WUQR3XVQFDJ5FK4ZO4MZQIZTBGBA6KD3FCV37VE54I
+txn Receiver
+==
+assert
+approved:
+int 1
+return

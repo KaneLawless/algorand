@@ -1,0 +1,145 @@
+#pragma version 5
+txn ApplicationID
+int 0
+==
+bnz main_l18
+txn OnCompletion
+int OptIn
+==
+bnz main_l15
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l14
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l13
+txn OnCompletion
+int CloseOut
+==
+bnz main_l12
+txn OnCompletion
+int NoOp
+==
+bnz main_l7
+err
+main_l7:
+global CurrentApplicationAddress
+int 0
+asset_holding_get AssetBalance
+store 3
+store 4
+load 3
+int 1
+==
+bnz main_l11
+load 3
+int 0
+==
+bnz main_l10
+err
+main_l10:
+itxn_begin
+int axfer
+itxn_field TypeEnum
+int 0
+itxn_field AssetAmount
+global CurrentApplicationAddress
+itxn_field AssetReceiver
+int 0
+itxn_field Fee
+int 75704798
+itxn_field XferAsset
+itxn_submit
+int 1
+return
+main_l11:
+global GroupSize
+int 2
+==
+assert
+gtxn 0 Sender
+gtxn 1 Sender
+==
+assert
+gtxn 1 TypeEnum
+int axfer
+==
+assert
+gtxn 1 XferAsset
+int 75704798
+==
+assert
+gtxn 1 AssetReceiver
+global CurrentApplicationAddress
+==
+assert
+gtxn 1 AssetAmount
+store 0
+txn Sender
+byte "transaction_count"
+app_local_get
+store 1
+txn Sender
+byte "total_redeemed"
+app_local_get
+store 2
+load 0
+gtxn 1 AssetAmount
+<=
+assert
+itxn_begin
+int axfer
+itxn_field TypeEnum
+load 0
+itxn_field AssetAmount
+addr 7FZSA6BDYUV7NVMSQYUGZDHLLDFT53QTGIPIBHD3FMUJOMO3HV2QTKCL5A
+itxn_field AssetReceiver
+int 75704798
+itxn_field XferAsset
+itxn_submit
+txn Sender
+byte "total_redeemed"
+load 2
+load 0
++
+app_local_put
+txn Sender
+byte "transaction_count"
+load 1
+int 1
++
+app_local_put
+int 1
+return
+main_l12:
+int 0
+return
+main_l13:
+int 0
+return
+main_l14:
+int 0
+return
+main_l15:
+int 0
+txn ApplicationID
+app_opted_in
+bnz main_l17
+global GroupSize
+int 1
+==
+assert
+txn AssetAmount
+int 0
+==
+assert
+int 1
+return
+main_l17:
+int 1
+return
+main_l18:
+int 1
+return

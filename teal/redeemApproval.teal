@@ -1,0 +1,93 @@
+#pragma version 5
+txn ApplicationID
+int 0
+==
+bnz main_l14
+txn OnCompletion
+int OptIn
+==
+bnz main_l11
+txn OnCompletion
+int CloseOut
+==
+bnz main_l10
+txn OnCompletion
+int UpdateApplication
+==
+bnz main_l9
+txn OnCompletion
+int DeleteApplication
+==
+bnz main_l8
+txn OnCompletion
+int NoOp
+==
+bnz main_l7
+err
+main_l7:
+global GroupSize
+int 2
+==
+assert
+gtxn 1 TypeEnum
+int axfer
+==
+assert
+gtxn 1 Sender
+gtxn 0 Sender
+==
+assert
+gtxn 1 AssetReceiver
+addr CCJTV6PBA54HXHNDGXIVGYPQQVY4GQM27W7I3T2CKUC7EGFZD5GMUTVV7M
+==
+assert
+gtxn 1 XferAsset
+int 74293166
+==
+assert
+gtxn 1 AssetAmount
+store 2
+txn Sender
+byte "total_redeemed"
+app_local_get
+store 0
+txn Sender
+byte "transaction_count"
+app_local_get
+store 1
+txn Sender
+byte "total_redeemed"
+load 0
+load 2
++
+app_local_put
+txn Sender
+byte "transaction_count"
+load 1
+int 1
++
+app_local_put
+int 1
+return
+main_l8:
+int 0
+return
+main_l9:
+int 0
+return
+main_l10:
+int 0
+return
+main_l11:
+int 0
+txn ApplicationID
+app_opted_in
+bnz main_l13
+int 1
+return
+main_l13:
+int 1
+return
+main_l14:
+int 1
+return

@@ -1,0 +1,9 @@
+// Check receiver is Alice
+txn Receiver
+addr RZUFWIN7S6WTBDD7GQAQNLKGQNSCOFIU2BYINT2WXEUDACCA4E3ECI6XEE
+==
+// Check amount is no more than 1 Algo
+txn Amount
+int 1000000
+<=
+&&

@@ -1,0 +1,43 @@
+#pragma version 5
+
+arg 0
+byte base64 1011
+==
+bnz book1
+arg 0
+byte base64 1012
+==
+bnz book2
+arg 0
+byte base64 1013
+==
+bnz book3
+int 0
+return
+book1:
+int 100000
+txn Amount
+==
+assert
+b auth
+book2:
+int 150000
+txn Amount
+==
+assert
+b auth
+book3:
+int 180000
+txn Amount
+==
+assert
+b auth
+auth:
+txn Sender
+addr RZUFWIN7S6WTBDD7GQAQNLKGQNSCOFIU2BYINT2WXEUDACCA4E3ECI6XEE
+==
+txn Receiver
+addr BNCTTEU5BGVOU3OO2SQ2AOSWVGSTPJFOKODGGAXWVYKM5XSWFGVB6SPCPM
+==
+&&
+
